@@ -1,9 +1,16 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import Header from './Components/Header';
+import GameController from './Components/GameController';
 
-class App extends Component {
-  render() {
-    return <div>Hello World</div>;
-  }
+
+const App = () =>{
+  return (
+    <div id='wholeContainer'>
+      <Header/>
+      <GameController/>
+      
+    </div>
+  )
 }
 
 export default App;
