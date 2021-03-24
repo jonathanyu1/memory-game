@@ -23,7 +23,7 @@ const CardImage = (props) => {
 
     return (
         <div className='cardImage'>
-            <img src={image} alt='poke image'></img>
+            <img src={image} alt={`pokemon ${props.id}`}></img>
         </div>
     )
 }

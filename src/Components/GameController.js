@@ -80,7 +80,7 @@ const GameController = () => {
 
     return (
         <div id='gameContainer'>
-            <button onClick={shuffleCards}>Shuffle</button>
+            {/* <button onClick={shuffleCards}>Shuffle</button> */}
             <Library idArray={idArray} checkCardsChosen={checkCardsChosen}/>
         </div>
     )
