@@ -30,11 +30,13 @@ const GameController = () => {
         console.log(tempArray);
     }
 
-    const checkCardsChosen = (card) => {
+    const checkCardsChosen = (cardId) => {
         // check if card is in cardsChosen array
         // if no: add to array, shuffle, add score
         // if yes: reset array, shuffle , reset score
+
         shuffleCards();
+      
     }
 
     const generateIdArray = (numCards) => {
