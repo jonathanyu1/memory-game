@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import Scoreboard from './Scoreboard'
 import Library from './Library';
+import GameEndOverlay from './GameEndOverlay';
 import { Pokedex } from 'pokeapi-js-wrapper';
 
 const PokedexObj = new Pokedex()
@@ -12,10 +14,13 @@ const GameController = () => {
     // logic for when user clicks on a card, to be called by onClick (in card.js)
     // logic when user wins/loses (clicks on wrong card or gets score = numCards=12)
 
-    const [numCards, setNumCards] = useState(12);
+    const [numCards, setNumCards] = useState(2);
     const [idArray, setIdArray] = useState([]);
     // const [image, setImage] = useState();
     const [cardsChosen, setCardsChosen] = useState([]);
+    const [currScore, setCurrScore] = useState(0);
+    const [highScore, setHighScore] = useState(0);
+    const [gameEndScore, setGameEndScore] = useState('');
 
 
     const shuffleCards = () => {
@@ -30,13 +35,71 @@ const GameController = () => {
         console.log(tempArray);
     }
 
+    const resetCardsChosen = () =>{
+        setCardsChosen([]);
+    }
+
+    const resetCurrScore = () => {
+        setCurrScore(0);
+    }
+
+    const incrementCurrScore = () =>{
+        setCurrScore(currScore+1);
+    }
+
+    const updateHighScore = () => {
+        if (currScore>highScore){
+            setHighScore(currScore);
+        }
+    }
+
+    const turnOffOverlay = () => {
+        setGameEndScore('');
+    }
+
+    const updateGameEndScore = () => {
+        setGameEndScore(currScore);
+    }
+
+    const newGame = () =>{
+        updateGameEndScore();
+        updateHighScore();
+        resetCurrScore();
+        resetCardsChosen();
+        generateIdArray(numCards);
+    }
+
+    useEffect(()=>{
+        // checks if game win
+        if (currScore===numCards){
+            newGame();
+
+        }
+    },[currScore])
+
     const checkCardsChosen = (cardId) => {
         // check if card is in cardsChosen array
         // if no: add to array, shuffle, add score
         // if yes: reset array, shuffle , reset score
-
         shuffleCards();
-      
+
+        // if clicked new card
+        if (cardsChosen.indexOf(cardId)===-1){
+            setCardsChosen([...cardsChosen,cardId]);
+            incrementCurrScore();
+            
+        } else {
+            // clicked a previously clicked card, lose
+            // reset score
+            // display game over overlay with new game button
+            // new cards
+            console.log('already clicked');
+            console.log(cardsChosen);
+            newGame();
+            // updateHighScore();
+            // resetCurrScore();
+
+        }
     }
 
     const generateIdArray = (numCards) => {
@@ -79,10 +142,16 @@ const GameController = () => {
         console.log(idArray);
     },[idArray])
 
+    useEffect(()=>{
+        console.log(cardsChosen);
+    },[cardsChosen]);
+
 
     return (
         <div id='gameContainer'>
             {/* <button onClick={shuffleCards}>Shuffle</button> */}
+            {gameEndScore ? <GameEndOverlay gameEndScore={gameEndScore} turnOffOverlay={turnOffOverlay} /> : null}
+            <Scoreboard currScore={currScore} highScore={highScore}/>
             <Library idArray={idArray} checkCardsChosen={checkCardsChosen}/>
         </div>
     )

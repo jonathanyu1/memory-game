@@ -1,3 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+
+
+html, body, #root, #wholeContainer{
+    height: 100%;
+    width: 100%;
+}
+
+html, body{
+    margin: 0;
+}
+
+#wholeContainer{
+    background-color: grey;
+}
+
 #libraryContainer{
     display: flex;
     flex-wrap: wrap;
@@ -6,4 +24,19 @@
 
 .cardContainer{
     text-align: center;
+}
+
+
+#gameEndOverlayContainer{
+    z-index: 10;
+    background-color: black;
+    color: white;
+}
+
+#gameEndMessage{
+
+}
+
+#btnPlayAgain{
+
 }
