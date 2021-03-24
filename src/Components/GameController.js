@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Library from './Library';
 import { Pokedex } from 'pokeapi-js-wrapper';
 
-const P = new Pokedex()
+const PokedexObj = new Pokedex()
 
 const GameController = () => {
 
@@ -14,13 +14,27 @@ const GameController = () => {
 
     const [numCards, setNumCards] = useState(12);
     const [idArray, setIdArray] = useState([]);
-    const [image, setImage] = useState();
+    // const [image, setImage] = useState();
     const [cardsChosen, setCardsChosen] = useState([]);
+
+
+    const shuffleCards = () => {
+        // https://stackoverflow.com/a/12646864 Durstenfeld shuffle
+        let tempArray = [...idArray];
+        console.log(tempArray);
+        for (let i = tempArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [tempArray[i], tempArray[j]] = [tempArray[j], tempArray[i]];
+        }
+        setIdArray(tempArray);
+        console.log(tempArray);
+    }
 
     const checkCardsChosen = (card) => {
         // check if card is in cardsChosen array
         // if no: add to array, shuffle, add score
         // if yes: reset array, shuffle , reset score
+        shuffleCards();
     }
 
     const generateIdArray = (numCards) => {
@@ -41,16 +55,16 @@ const GameController = () => {
 
     // testing pokemon api, calls after initial render, and when numCards changes
     useEffect(()=>{
-        async function fetchPokemonByID(){
-            let pokemon1 = await P.getPokemonByName('893');
-            console.log(pokemon1);
-            console.log(pokemon1.sprites.front_default);
-            setImage(pokemon1.sprites.front_default);
-        }
-        fetchPokemonByID()
-         .catch (error=>{
-            console.log('Error: '+error);
-        });
+        // async function fetchPokemonByID(){
+        //     let pokemon1 = await PokedexObj.getPokemonByName('893');
+        //     console.log(pokemon1);
+        //     console.log(pokemon1.sprites.front_default);
+        //     setImage(pokemon1.sprites.front_default);
+        // }
+        // fetchPokemonByID()
+        //  .catch (error=>{
+        //     console.log('Error: '+error);
+        // });
 
         // newIdArray(numCards);
         generateIdArray(numCards);
@@ -66,8 +80,8 @@ const GameController = () => {
 
     return (
         <div id='gameContainer'>
-            <img src={image}></img> 
-            <Library idArray={idArray}/>
+            <button onClick={shuffleCards}>Shuffle</button>
+            <Library idArray={idArray} checkCardsChosen={checkCardsChosen}/>
         </div>
     )
 }
