@@ -15,6 +15,13 @@ const GameController = () => {
     const [numCards, setNumCards] = useState(12);
     const [idArray, setIdArray] = useState([]);
     const [image, setImage] = useState();
+    const [cardsChosen, setCardsChosen] = useState([]);
+
+    const checkCardsChosen = (card) => {
+        // check if card is in cardsChosen array
+        // if no: add to array, shuffle, add score
+        // if yes: reset array, shuffle , reset score
+    }
 
     const generateIdArray = (numCards) => {
         // generate array of numCards=12 pokemon's IDs, from 1-893 (gen 1-8)
