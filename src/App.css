@@ -2,10 +2,21 @@
     box-sizing: border-box;
 }
 
+:root{
+    --main-background-color: #121c35;
+    --header-color: #36486b;
+    --header-text-color: #fefbd8;
+    --scoreboard-color: #36486b;
+    --card-text-color: #fefbd8;
+    --card-background-color: #f1e3dd;
+    --slider-color: #5c9df3;
+}
+
 
 html, body, #root, #wholeContainer{
     height: 100%;
     width: 100%;
+    background-color: var(--main-background-color);
 }
 
 html, body{
@@ -13,20 +24,41 @@ html, body{
 }
 
 #wholeContainer{
-    background-color: grey;
+    background-color: var(--main-background-color);
 }
 
 
 
 /* Header */
 
+#headerContainer{
+    background-color: var(--header-color);
+    color: var(--header-text-color);
+}
+
 #headerTitleContainer{
     display: flex;
     align-items:center;
+    justify-content:center;
 }
 
 #headerTitle{
     font-size: 50px;
+}
+
+
+/* Scoreboard */
+
+#scoreboardContainer{
+    background-color: var(--scoreboard-color);
+    color: var(--header-text-color);
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+}
+
+#currentScore, #highestScore{
+    padding: 0px 20px 20px 20px;
 }
 
 
@@ -35,25 +67,76 @@ html, body{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin: 1% 20%;
 }
 
 /* Card */
 
 .cardContainer{
     text-align: center;
+    margin: 30px;
+    /* color: var(--card-text-color); */
+    border-radius: 10px;
+    background-color:var(--card-background-color);
+    font-size: 25px;
 }
 
 .cardContainer:hover{
     cursor: pointer;
-    transform: scale(1.1);
-    background-color: lightyellow;
+    transform: scale(1.2);
+    
 }
 
+.cardContainer img{
+    width: 150px;
+    height: 150px;
+}
 
-/* scoreboard Container */ 
+.cardName{
+    border-top: 1px solid black;
+    padding: 5px 0px;
+}
 
-#scoreboardContainer{
+/* slider */ 
+
+#sliderContainer{
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#numCardsSlider{
+    -webkit-appearance: none;
+    height: 15px;
+    border-radius: 5px;  
+    background: #d3d3d3;
+    outline: none;
+    -webkit-transition: .2s;
+    width: 10%;
+}
+
+#numCardsSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%; 
+    background: var(--slider-color);
+    cursor: pointer;
+  }
+  
+#numCardsSlider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: var(--slider-color);
+    cursor: pointer;
+  }
+
+#sliderValueText{
+    font-size: 30px;
+    margin-left: 10px;
+    color: var(--header-text-color);
 }
 
 
@@ -70,9 +153,13 @@ html, body{
 }
 
 #gameEndMessage{
-
+    color: var(--header-text-color);
 }
 
 #btnPlayAgain{
-
+    border: none;
+    border-radius: 5px;
+    font-size: 30px;
+    margin-top: 30px;
+    padding: 10px;
 }

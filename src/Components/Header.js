@@ -26,7 +26,7 @@ const Header = () => {
                 <img src={image} alt='pikachuLogo'></img>
                 <div id='headerTitle'>Pokémon Memory Game</div>
             </div>
-            <div id='gameInstructions'>Click on a Pokémon you haven't clicked yet!</div>
+            {/* <div id='gameInstructions'>Click on a Pokémon you haven't clicked yet!</div> */}
         </div>
     )
 }

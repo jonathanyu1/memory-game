@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Scoreboard from './Scoreboard'
 import Library from './Library';
 import GameEndOverlay from './GameEndOverlay';
@@ -6,18 +6,18 @@ import GameEndOverlay from './GameEndOverlay';
 const GameController = () => {
 
     // Need functions for: 
-    // pick random ids (1 to 893 currently, for gen1-8) for numCards=12 pokemon, put into array
+    // pick random ids (1 to 893 currently, for gen1-8) for numCards=10 pokemon, put into array
     // shuffle order of pokemon list 
     // logic for when user clicks on a card, to be called by onClick (in card.js)
-    // logic when user wins/loses (clicks on wrong card or gets score = numCards=12)
+    // logic when user wins/loses (clicks on wrong card or gets score = numCards=10)
 
-    const [numCards, setNumCards] = useState(12);
+    const [numCards, setNumCards] = useState(10);
     const [idArray, setIdArray] = useState([]);
     const [cardsChosen, setCardsChosen] = useState([]);
     const [currScore, setCurrScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
     const [gameEndScore, setGameEndScore] = useState('');
-    const [sliderValue, setSliderValue] = useState(12);
+    const [sliderValue, setSliderValue] = useState(10);
 
 
     const shuffleCards = () => {
@@ -97,7 +97,7 @@ const GameController = () => {
     }
 
     const generateIdArray = (numCards) => {
-        // generate array of numCards=12 pokemon's IDs, from 1-893 (gen 1-8)
+        // generate array of numCards=10 pokemon's IDs, from 1-893 (gen 1-8)
         console.log(numCards);
         const newArr = [];
         while(newArr.length<numCards){
@@ -149,7 +149,7 @@ const GameController = () => {
                                             type='range'
                                             id='numCardsSlider'
                                             min='2'
-                                            max='24'
+                                            max='15'
                                             value={sliderValue}
                                             // onChange={(e) => setSliderValue(e.target.value)}
                                             onChange={onChange}
