@@ -17,6 +17,7 @@ html, body, #root, #wholeContainer{
     height: 100%;
     width: 100%;
     background-color: var(--main-background-color);
+    font-family: 'Oswald', sans-serif;
 }
 
 html, body{
