@@ -10,7 +10,6 @@ const CardImage = (props) => {
     useEffect(()=>{
         async function fetchImage (){
             const pokemonImage = await PokedexObj.getPokemonByName(props.id);
-            // setImage(pokemonImage.sprites.front_default);
             setImage(pokemonImage.sprites.other["official-artwork"].front_default);
         }
 
@@ -21,7 +20,6 @@ const CardImage = (props) => {
         
     },[props]);
     
-
     return (
         <div className='cardImage'>
             <img src={image} alt={`pokemon ${props.id}`}></img>
