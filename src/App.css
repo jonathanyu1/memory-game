@@ -16,6 +16,21 @@ html, body{
     background-color: grey;
 }
 
+
+
+/* Header */
+
+#headerTitleContainer{
+    display: flex;
+    align-items:center;
+}
+
+#headerTitle{
+    font-size: 50px;
+}
+
+
+/* library */
 #libraryContainer{
     display: flex;
     flex-wrap: wrap;
@@ -27,10 +42,23 @@ html, body{
 }
 
 
+/* scoreboard Container */ 
+
+#scoreboardContainer{
+    display: flex;
+}
+
+
+/* gameEnd overlay  */
+
 #gameEndOverlayContainer{
     z-index: 10;
-    background-color: black;
-    color: white;
+    display: block;
+    position: absolute;
+    left: 40%;
+    top: 40%;
+    font-size: 50px;
+    text-align: center;
 }
 
 #gameEndMessage{

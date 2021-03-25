@@ -2,9 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import Scoreboard from './Scoreboard'
 import Library from './Library';
 import GameEndOverlay from './GameEndOverlay';
-import { Pokedex } from 'pokeapi-js-wrapper';
-
-const PokedexObj = new Pokedex()
 
 const GameController = () => {
 
@@ -14,9 +11,8 @@ const GameController = () => {
     // logic for when user clicks on a card, to be called by onClick (in card.js)
     // logic when user wins/loses (clicks on wrong card or gets score = numCards=12)
 
-    const [numCards, setNumCards] = useState(2);
+    const [numCards, setNumCards] = useState(12);
     const [idArray, setIdArray] = useState([]);
-    // const [image, setImage] = useState();
     const [cardsChosen, setCardsChosen] = useState([]);
     const [currScore, setCurrScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
@@ -81,13 +77,12 @@ const GameController = () => {
         // check if card is in cardsChosen array
         // if no: add to array, shuffle, add score
         // if yes: reset array, shuffle , reset score
-        shuffleCards();
 
         // if clicked new card
         if (cardsChosen.indexOf(cardId)===-1){
             setCardsChosen([...cardsChosen,cardId]);
             incrementCurrScore();
-            
+            shuffleCards();  
         } else {
             // clicked a previously clicked card, lose
             // reset score
@@ -96,8 +91,6 @@ const GameController = () => {
             console.log('already clicked');
             console.log(cardsChosen);
             newGame();
-            // updateHighScore();
-            // resetCurrScore();
 
         }
     }
@@ -120,20 +113,7 @@ const GameController = () => {
 
     // testing pokemon api, calls after initial render, and when numCards changes
     useEffect(()=>{
-        // async function fetchPokemonByID(){
-        //     let pokemon1 = await PokedexObj.getPokemonByName('893');
-        //     console.log(pokemon1);
-        //     console.log(pokemon1.sprites.front_default);
-        //     setImage(pokemon1.sprites.front_default);
-        // }
-        // fetchPokemonByID()
-        //  .catch (error=>{
-        //     console.log('Error: '+error);
-        // });
-
-        // newIdArray(numCards);
         generateIdArray(numCards);
-        
     },[numCards]);
 
     useEffect(()=>{
@@ -149,10 +129,9 @@ const GameController = () => {
 
     return (
         <div id='gameContainer'>
-            {/* <button onClick={shuffleCards}>Shuffle</button> */}
+            {gameEndScore ? null : <Scoreboard currScore={currScore} highScore={highScore}/>}
+            {gameEndScore ? null : <Library idArray={idArray} checkCardsChosen={checkCardsChosen}/>}
             {gameEndScore ? <GameEndOverlay gameEndScore={gameEndScore} turnOffOverlay={turnOffOverlay} /> : null}
-            <Scoreboard currScore={currScore} highScore={highScore}/>
-            <Library idArray={idArray} checkCardsChosen={checkCardsChosen}/>
         </div>
     )
 }
