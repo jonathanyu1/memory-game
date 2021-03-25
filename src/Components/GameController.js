@@ -129,7 +129,8 @@ const GameController = () => {
 
     return (
         <div id='gameContainer'>
-            {gameEndScore ? null : <Scoreboard currScore={currScore} highScore={highScore}/>}
+            {/* {gameEndScore ? null : <Scoreboard currScore={currScore} highScore={highScore}/>} */}
+            <Scoreboard currScore={currScore} highScore={highScore}/>
             {gameEndScore ? null : <Library idArray={idArray} checkCardsChosen={checkCardsChosen}/>}
             {gameEndScore ? <GameEndOverlay gameEndScore={gameEndScore} turnOffOverlay={turnOffOverlay} /> : null}
         </div>

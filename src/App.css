@@ -37,8 +37,16 @@ html, body{
     justify-content: space-between;
 }
 
+/* Card */
+
 .cardContainer{
     text-align: center;
+}
+
+.cardContainer:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    background-color: lightyellow;
 }
 
 
@@ -54,9 +62,9 @@ html, body{
 #gameEndOverlayContainer{
     z-index: 10;
     display: block;
-    position: absolute;
-    left: 40%;
-    top: 40%;
+    /* position: absolute; */
+    margin: 10% auto;
+    /* top: 40%; */
     font-size: 50px;
     text-align: center;
 }
