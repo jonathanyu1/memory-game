@@ -17,6 +17,7 @@ const GameController = () => {
     const [currScore, setCurrScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
     const [gameEndScore, setGameEndScore] = useState('');
+    const [sliderValue, setSliderValue] = useState(12);
 
 
     const shuffleCards = () => {
@@ -111,11 +112,6 @@ const GameController = () => {
         console.log(idArray);
     }
 
-    // testing pokemon api, calls after initial render, and when numCards changes
-    useEffect(()=>{
-        generateIdArray(numCards);
-    },[numCards]);
-
     useEffect(()=>{
         // test if idArray changed, delete after
         console.log('new useEffect');
@@ -126,6 +122,21 @@ const GameController = () => {
         console.log(cardsChosen);
     },[cardsChosen]);
 
+    // testing pokemon api, calls after initial render, and when numCards changes
+    useEffect(()=>{
+        // generateIdArray(numCards);
+        newGame();
+        turnOffOverlay();
+    },[numCards]);
+
+    const onChange = (e) => {
+        setSliderValue(e.target.value);
+    }
+
+    const handleSliderChange = (e) =>{
+        setSliderValue(e.target.value);
+        setNumCards(sliderValue);
+    }
 
     return (
         <div id='gameContainer'>
@@ -133,6 +144,19 @@ const GameController = () => {
             <Scoreboard currScore={currScore} highScore={highScore}/>
             {gameEndScore ? null : <Library idArray={idArray} checkCardsChosen={checkCardsChosen}/>}
             {gameEndScore ? <GameEndOverlay gameEndScore={gameEndScore} turnOffOverlay={turnOffOverlay} /> : null}
+            {gameEndScore ? null : (<div id='sliderContainer'>
+                                        <input 
+                                            type='range'
+                                            id='numCardsSlider'
+                                            min='2'
+                                            max='24'
+                                            value={sliderValue}
+                                            // onChange={(e) => setSliderValue(e.target.value)}
+                                            onChange={onChange}
+                                            onMouseUp={handleSliderChange}
+                                        />
+                                        <div id='sliderValueText'>{sliderValue}</div>
+                                    </div>)}
         </div>
     )
 }
