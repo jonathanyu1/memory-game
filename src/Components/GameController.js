@@ -71,9 +71,9 @@ const GameController = () => {
 
         // if clicked new card
         if (cardsChosen.indexOf(cardId)===-1){
-            setCardsChosen([...cardsChosen,cardId]);
             incrementCurrScore();
-            shuffleCards();  
+            setCardsChosen([...cardsChosen,cardId]);
+            shuffleCards();
         } else {
             // clicked a previously clicked card, lose
             // reset score
@@ -110,6 +110,12 @@ const GameController = () => {
         setSliderValue(e.target.value);
         setNumCards(sliderValue);
     }
+
+    useEffect(()=>{
+        if (cardsChosen.length>=numCards){
+            newGame();
+        }
+    },[cardsChosen])
 
     return (
         <div id='gameContainer'>
