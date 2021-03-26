@@ -77,6 +77,7 @@ html, body{
     text-align: center;
     margin: 30px;
     /* color: var(--card-text-color); */
+    border: 5px solid #928b88;
     border-radius: 10px;
     background-color:var(--card-background-color);
     font-size: 25px;
