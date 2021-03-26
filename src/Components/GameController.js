@@ -80,7 +80,6 @@ const GameController = () => {
             // display game over overlay with new game button
             // new cards
             newGame();
-
         }
     }
 
