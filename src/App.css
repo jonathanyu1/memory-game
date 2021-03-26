@@ -96,7 +96,7 @@ html, body{
 }
 
 .cardName{
-    border-top: 5px solid var(--card-border-color);
+    border-top: 3px solid var(--card-border-color);
     padding: 5px 0px;
 }
 
